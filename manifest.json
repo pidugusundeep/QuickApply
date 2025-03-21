@@ -1,0 +1,24 @@
+{
+    "name": "QuickApply",
+    "description": "Quick apply to jobs on linkedin",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "webNavigation",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://*.linkedin.com/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*.linkedin.com/*"],
+            "js": ["content.js"]
+        }
+    ]
+}

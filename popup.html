@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JobPost Time Setter</title>
+    <title>Quick Apply</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -10,22 +10,36 @@
       input {
         margin-bottom: 10px;
       }
+      button {
+        width: 100%;
+        margin-top: 10px;
+      }
+      #toggle_button {
+        color: white;
+      }
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+      }
     </style>
   </head>
   <body>
-    <h1>Select time in seconds</h1>
-    <div>
-      <input type="radio" id="1_hour" name="time" value="3600">
-      <label for="1_hour">1 hour</label><br>
-      <input type="radio" id="6_hours" name="time" value="21600">
-      <label for="6_hours">6 hours</label><br>
-      <input type="radio" id="12_hours" name="time" value="43200">
-      <label for="12_hours">12 hours</label><br>
+    <h1>Quick Apply</h1>
+    <div id="selection">
+        <input type="radio" id="1_hour" name="time" value="3600">
+        <label for="1_hour">1 hour</label><br>
+        <input type="radio" id="6_hours" name="time" value="21600">
+        <label for="6_hours">6 hours</label><br>
+        <input type="radio" id="12_hours" name="time" value="43200">
+        <label for="12_hours">12 hours</label><br>
+        <input type="number" id="f_TPR_value" placeholder="Enter value in seconds" />
+        <button id="save_button">Save</button>
+        <p>Saved time value (in seconds): <span id="saved_value"></span></p>
+        <p>* This will always override the time when searching for jobs on LinkedIn</p>
     </div>
-    <input type="number" id="f_TPR_value" placeholder="Enter value in seconds" />
-    <button id="save_button">Save</button>
-    <p>Saved time value( in seconds): <span id="saved_value"></span></p>
-    <p>* This will always overrice the time when seaching for jobs</p>
+    <div class="button-container">
+      <button id="toggle_button">Enable</button>
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>

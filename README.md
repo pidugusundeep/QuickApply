@@ -8,8 +8,8 @@ To install this extension in developer mode, follow these steps:
 
 1. **Clone the repository**:
     ```sh
-    git clone <repository-url>
-    cd <repository-directory>
+    gh repo clone pidugusundeep/QuickApply
+    cd QuickApply
     ```
 
 2. **Open Chrome and navigate to the Extensions page**:

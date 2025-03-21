@@ -6,6 +6,7 @@
       body {
         font-family: Arial, sans-serif;
         padding: 10px;
+        width: 300px; /* Set a fixed width for the popup */
       }
       input {
         margin-bottom: 10px;
@@ -20,6 +21,14 @@
       .button-container {
         display: flex;
         justify-content: space-between;
+      }
+      #saved_message {
+        display: none;
+        color: green;
+        margin-top: 10px;
+      }
+      #f_TPR_value{
+        width: 200px;
       }
     </style>
   </head>
@@ -40,6 +49,7 @@
     <div class="button-container">
       <button id="toggle_button">Enable</button>
     </div>
+    <p id="saved_message">Value saved successfully!</p>
     <script src="popup.js"></script>
   </body>
 </html>

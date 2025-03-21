@@ -23,6 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Value saved:', value);
                 // Update the displayed saved value
                 document.getElementById('saved_value').textContent = value;
+
+                // Show the saved message
+                const savedMessage = document.getElementById('saved_message');
+                savedMessage.style.display = 'block';
+                setTimeout(() => {
+                    savedMessage.style.display = 'none';
+                }, 2000);
             });
         }
     });

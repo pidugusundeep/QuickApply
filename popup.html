@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JobPost Time Setter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 10px;
+      }
+      input {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Select time in seconds</h1>
+    <div>
+      <input type="radio" id="1_hour" name="time" value="3600">
+      <label for="1_hour">1 hour</label><br>
+      <input type="radio" id="6_hours" name="time" value="21600">
+      <label for="6_hours">6 hours</label><br>
+      <input type="radio" id="12_hours" name="time" value="43200">
+      <label for="12_hours">12 hours</label><br>
+    </div>
+    <input type="number" id="f_TPR_value" placeholder="Enter value in seconds" />
+    <button id="save_button">Save</button>
+    <p>Saved time value( in seconds): <span id="saved_value"></span></p>
+    <p>* This will always overrice the time when seaching for jobs</p>
+    <script src="popup.js"></script>
+  </body>
+</html>

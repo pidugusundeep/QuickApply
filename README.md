@@ -1,55 +1,57 @@
-# QuickApply Chrome Extension
+# QuickApply - LinkedIn Job Search Time Filter Extension
 
-QuickApply is a Chrome extension that allows you to quickly apply to jobs on LinkedIn by setting a custom time value for job searches.
+A Chrome extension that enhances LinkedIn's job search experience by adding custom time filter options.
+
+## Features
+
+- Adds custom time filter options to LinkedIn's job search:
+  - Past 1 hour
+  - Past 6 hours
+  - Past 12 hours
+- Seamlessly integrates with LinkedIn's existing time filter dropdown
+- Automatically removes duplicate filter options
+- Persists selected time filter across page reloads
+- Works with LinkedIn's single-page application architecture
 
 ## Installation
 
-To install this extension in developer mode, follow these steps:
-
-1. **Clone the repository**:
-    ```sh
-    gh repo clone pidugusundeep/QuickApply
-    cd QuickApply
-    ```
-
-2. **Open Chrome and navigate to the Extensions page**:
-    - Open Chrome.
-    - Go to `chrome://extensions/` in the address bar.
-
-3. **Enable Developer Mode**:
-    - In the top right corner of the Extensions page, toggle the "Developer mode" switch to the "On" position.
-
-4. **Load the extension**:
-    - Click the "Load unpacked" button.
-    - In the file dialog, navigate to the directory where you cloned the repository and select it.
-
-5. **Verify the extension is installed**:
-    - You should see the "QuickApply" extension listed on the Extensions page.
-    - Ensure the extension is enabled.
+1. Clone this repository or download the source code
+2. Open Chrome and navigate to `chrome://extensions/`
+3. Enable "Developer mode" in the top right corner
+4. Click "Load unpacked" and select the extension directory
 
 ## Usage
 
-1. **Open the extension popup**:
-    - Click on the QuickApply extension icon in the Chrome toolbar.
+1. Go to LinkedIn's job search page
+2. Click on the "Date posted" filter
+3. You'll see additional time filter options (1h, 6h, 12h) at the top of the dropdown
+4. Select your desired time range
+5. The filter will be applied automatically
 
-2. **Set the time value**:
-    - Select a predefined time value or enter a custom value in seconds.
-    - Click the "Save" button to save the value.
+## Technical Details
 
-3. **Enable or disable the extension**:
-    - Use the "Enable" or "Disable" button to toggle the extension on or off.
+The extension consists of three main components:
 
-4. **Apply the time value**:
-    - When the extension is enabled, it will automatically set the `f_TPR` parameter in the LinkedIn job search URL to the saved value.
+- `content.js`: Injects custom time filters into LinkedIn's job search interface
+- `background.js`: Handles extension initialization and page navigation
+- `manifest.json`: Extension configuration and permissions
 
-## Files
+## Permissions Used
 
-- `background.js`: Contains the background script for the extension.
-- `content.js`: Contains the content script that modifies the LinkedIn job search URL.
-- `popup.html`: Contains the HTML for the extension popup.
-- `popup.js`: Contains the JavaScript for the extension popup.
-- `manifest.json`: Contains the extension manifest file.
+- `tabs`: For accessing LinkedIn tabs
+- `webNavigation`: For handling single-page application navigation
+- `scripting`: For injecting content scripts
+- `storage`: For maintaining extension state
+- Host permission for `linkedin.com` domains
+
+## Development
+
+To modify the extension:
+
+1. Make changes to the source files
+2. Reload the extension in `chrome://extensions/`
+3. Test changes on LinkedIn's job search page
 
 ## License
 
-This project is licensed under the MIT License.
+MIT License - Feel free to modify and distribute as needed.

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QuickApply Settings</title>
+    <!-- 
+      QuickApply Chrome Extension
+      Popup Interface
+      
+      This file contains the HTML structure and CSS styles for the extension's popup interface.
+      The popup provides controls for:
+      - Setting time filters for LinkedIn job searches
+      - Enabling/disabling the extension
+      - Viewing current settings
+      
+      Version: 1.0.1
+      Last Updated: 2024
+    -->
+    <style>
+      /* Base styles for the popup container */
+      body {
+        width: 300px;
+        padding: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+        color: #1d1d1f;
+        background-color: #ffffff;
+      }
+
+      /* Main container layout */
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* Header section with logo and title */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 4px;
+        text-align: center;
+        position: relative;
+      }
+
+      .header img {
+        width: 20px;
+        height: 20px;
+        display: block;
+        position: absolute;
+        left: 0;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        color: #1d1d1f;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Section containers */
+      .section {
+        background: #f5f5f7;
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .section h2 {
+        margin: 0 0 12px 0;
+        font-size: 13px;
+        font-weight: 500;
+        color: #86868b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* Time options grid layout */
+      .time-options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      /* Individual time option styling */
+      .time-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid #d2d2d7;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background-color: #ffffff;
+        font-size: 13px;
+      }
+
+      .time-option:hover {
+        background-color: #f5f5f7;
+        border-color: #86868b;
+      }
+
+      .time-option input[type="radio"] {
+        margin: 0;
+        width: 14px;
+        height: 14px;
+      }
+
+      /* Custom time input styling */
+      .custom-time {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-top: 8px;
+      }
+
+      .custom-time input {
+        width: 80px;
+        padding: 6px 10px;
+        border: 1px solid #d2d2d7;
+        border-radius: 8px;
+        font-size: 13px;
+        font-family: inherit;
+        background-color: #ffffff;
+      }
+
+      .custom-time input:focus {
+        outline: none;
+        border-color: #0071e3;
+      }
+
+      .custom-time span {
+        font-size: 13px;
+        color: #86868b;
+      }
+
+      /* Button base styles */
+      .button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        font-family: inherit;
+      }
+
+      /* Save button specific styles */
+      .save-button {
+        background-color: #0071e3;
+        color: white;
+        width: 100%;
+        margin-top: 12px;
+      }
+
+      .save-button:hover {
+        background-color: #0077ed;
+      }
+
+      .save-button:disabled {
+        background-color: #999999;
+        cursor: not-allowed;
+      }
+
+      /* Toggle button specific styles */
+      .toggle-button {
+        background-color: #34c759;
+        color: white;
+        width: 100%;
+      }
+
+      .toggle-button:hover {
+        background-color: #30b94f;
+      }
+
+      .toggle-button.disabled {
+        background-color: #ff3b30;
+      }
+
+      .toggle-button.disabled:hover {
+        background-color: #ff453a;
+      }
+
+      /* Message display styles */
+      .message {
+        display: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-top: 8px;
+        font-size: 12px;
+      }
+
+      /* Success message styles */
+      .success-message {
+        background-color: #e8f5e9;
+        color: #1e7e34;
+        border: 1px solid #c8e6c9;
+      }
+
+      /* Error message styles */
+      .error-message {
+        background-color: #ffebee;
+        color: #c62828;
+        border: 1px solid #ffcdd2;
+      }
+
+      /* Status indicator styles */
+      .status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 8px;
+        font-size: 12px;
+        color: #86868b;
+      }
+
+      .status-indicator {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      .status-indicator.active {
+        background-color: #34c759;
+      }
+
+      .status-indicator.inactive {
+        background-color: #ff3b30;
+      }
+
+      #status_text {
+        text-align: center;
+      }
+
+      /* Current settings text */
+      .section p {
+        margin: 0;
+        font-size: 13px;
+      }
+
+      .section p span {
+        color: #0071e3;
+        font-weight: 500;
+      }
+
+      /* Keyboard shortcuts styling */
+      .keyboard-shortcuts {
+        font-size: 12px;
+        color: #86868b;
+        text-align: center;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #d2d2d7;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main container for all popup content -->
+    <div class="container">
+      <!-- Header section with logo and title -->
+      <div class="header">
+        <img src="assets/icons/icon16.png" alt="QuickApply Icon">
+        <h1>QuickApply</h1>
+      </div>
+
+      <!-- Time Filter Settings Section -->
+      <div class="section">
+        <h2>Time Filter</h2>
+        <div id="selection">
+          <!-- Preset time options -->
+          <div id="preset_container" class="time-options">
+            <!-- Preset buttons will be dynamically added here -->
+          </div>
+          <!-- Custom time input -->
+          <div class="custom-time">
+            <input type="number" id="f_TPR_value" placeholder="Custom time" min="1">
+            <span>seconds</span>
+          </div>
+          <button id="save_button" class="button save-button">Save</button>
+          <div id="saved_message" class="message"></div>
+        </div>
+      </div>
+
+      <!-- Extension Status Section -->
+      <div class="section">
+        <h2>Status</h2>
+        <button id="toggle_button" class="button toggle-button">Enable</button>
+        <div class="status">
+          <div id="status_indicator" class="status-indicator"></div>
+          <span id="status_text">Extension is enabled</span>
+        </div>
+      </div>
+
+      <!-- Current Settings Section -->
+      <div class="section">
+        <h2>Current Settings</h2>
+        <p>Time filter: <span id="saved_value">3600</span> seconds</p>
+      </div>
+
+      <!-- Keyboard Shortcuts Section -->
+      <div class="keyboard-shortcuts">
+        Shortcuts: &#8984;/Ctrl + S to save &bull; &#8984;/Ctrl + T to toggle
+      </div>
+    </div>
+    <!-- Scripts -->
+    <script src="../dist/js/popup.bundle.js"></script>
+  </body>
+</html>

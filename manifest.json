@@ -1,28 +1,38 @@
 {
     "name": "QuickApply",
-    "description": "Quick apply to jobs on linkedin",
+    "description": "Quickly apply for jobs on LinkedIn by setting a custom time value.",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": [
-        "tabs",
+        "storage",
         "activeTab",
-        "webNavigation",
         "scripting",
-        "storage"
+        "webNavigation"
     ],
     "host_permissions": [
         "https://*.linkedin.com/*"
     ],
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "background.js",
+        "type": "module"
     },
     "content_scripts": [
         {
-            "matches": ["https://*.linkedin.com/*"],
+            "matches": ["*://*.linkedin.com/*"],
             "js": ["content.js"]
         }
     ],
     "action": {
-        "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
     }
 }
